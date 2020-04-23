@@ -66,7 +66,7 @@ int main() {
    
         if (PORTBbits.RB4 == 0) { //check if user button (B4) is pushed
             int i;
-            for (i=1;i<3;i++) { // turn on and turn off LED two times
+            for (i=1;i<4;i++) { // turn on and turn off LED two times
                 LATAbits.LATA4 = 1; //turn on green LED
                 delay();
                 LATAbits.LATA4 = 0; //turn off green LED
