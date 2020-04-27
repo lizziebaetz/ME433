@@ -6,13 +6,13 @@
 
 # Macros
 TOP=`pwd`
-CND_CONF=C32_PIC32MX795F512L
+CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/pic32_c_template.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=pic32_c_template.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=pic32ctemplate/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/HW3.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=HW3.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=hw3.x/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/pic32ctemplate/bin
+makeDirectory ${TMPDIR}/hw3.x/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/pic32ctemplate.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/hw3.x.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/pic32ctemplate.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/hw3.x.tar *
 checkReturnCode
 
 # Cleanup

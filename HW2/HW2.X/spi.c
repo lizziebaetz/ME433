@@ -74,8 +74,8 @@ int main() {
     
     // make 16bit 
 
-    makeTriWave();
-    makeSineWave();
+//    makeTriWave();
+//    makeSineWave();
     
     while(1) {
         // write one byte over SPI1
@@ -84,52 +84,29 @@ int main() {
 //        makeSineWave();
         
         // Send bytes over SPI1 to create tri wave
-         unsigned char cb = 1;
-         unsigned short pb;
-         unsigned int j;
-        unsigned char ca = 0;
-        unsigned short pa;
-        
- 
-         for(j=0;j<NUMPTS;++j) {
-             
-            int voltage2 = TriWave[j]*4095; //scale tri wave to range 0 to max volts
-
-            pb = cb<<15;
-            pb = pb|(0b111<<12);
-            pb = pb|voltage2;
-
-            LATAbits.LATA0 = 0; //Bring CS low
-            spi_io(pb>>8); //write the high bits
-            spi_io(pb); //write the low bits
-            LATAbits.LATA0 = 1; //Bring CS high
-
-           
-            
-            int voltage1 = SineWave[j]*4095; //scale sine wave to range 0 to 3.3 v
-
-            pa = ca<<15;
-            pa = pa|(0b111<<12);
-            pa = pa|voltage1;
-
-
-            LATAbits.LATA0 = 0; //Bring CS low
-            spi_io(pa>>8); //write the high bits
-            spi_io(pa); //write the low bits
-            LATAbits.LATA0 = 1; //Bring CS high
-            _CP0_SET_COUNT(0);
-            while (_CP0_GET_COUNT() < 16000) { // 1 second = 24000000
-            ;
-            }
-            
-          }
-        
-        // Send bytes over SPI1 to create sine wave
+//         unsigned char cb = 1;
+//         unsigned short pb;
+//         unsigned int j;
 //        unsigned char ca = 0;
 //        unsigned short pa;
-//        unsigned short k;
-//        for(k=0;k<RES;++k) {
-//            int voltage1 = SineWave[k]*4095;
+//        
+ 
+//         for(j=0;j<NUMPTS;++j) {
+//             
+//            int voltage2 = TriWave[j]*4095; //scale tri wave to range 0 to max volts
+//
+//            pb = cb<<15;
+//            pb = pb|(0b111<<12);
+//            pb = pb|voltage2;
+//
+//            LATAbits.LATA0 = 0; //Bring CS low
+//            spi_io(pb>>8); //write the high bits
+//            spi_io(pb); //write the low bits
+//            LATAbits.LATA0 = 1; //Bring CS high
+//
+//           
+//            
+//            int voltage1 = SineWave[j]*4095; //scale sine wave to range 0 to 3.3 v
 //
 //            pa = ca<<15;
 //            pa = pa|(0b111<<12);
@@ -141,10 +118,16 @@ int main() {
 //            spi_io(pa); //write the low bits
 //            LATAbits.LATA0 = 1; //Bring CS high
 //            _CP0_SET_COUNT(0);
-//            while (_CP0_GET_COUNT() < 2400) { // 1 second = 24000000
+//            while (_CP0_GET_COUNT() < 16000) { // 1 second = 24000000
 //            ;
 //            }
-//        }
+//            
+//          }
+        
+            makeTriWave();
+            makeSineWave();
+    
+
     }
           
 }
@@ -205,27 +188,27 @@ void makeTriWave() {
     }
     
 //    // Send bytes over SPI1
-//      unsigned char cb = 1;
-//      unsigned short pb;
-//      unsigned int j;
-//      int voltage2;
-//      for(j=0;j<RES;++j) {
-//        voltage2 = TriWave[j]*4095;
-//
-//                pb = cb<<15;
-//                pb = pb|(0b111<<12);
-//                pb = pb|voltage2;
-//                
-//                LATAbits.LATA0 = 0; //Bring CS low
-//                spi_io(pb>>8); //write the high bits
-//                spi_io(pb); //write the low bits
-//                LATAbits.LATA0 = 1; //Bring CS high
-//                
-//        _CP0_SET_COUNT(0);
-//        while (_CP0_GET_COUNT() < 24000) { // 1 second = 24000000
-//            ;
-//        }
-//      }
+      unsigned char cb = 1;
+      unsigned short pb;
+      unsigned int j;
+      int voltage2;
+      for(j=0;j<NUMPTS;++j) {
+        voltage2 = TriWave[j]*4095;
+
+                pb = cb<<15;
+                pb = pb|(0b111<<12);
+                pb = pb|voltage2;
+                
+                LATAbits.LATA0 = 0; //Bring CS low
+                spi_io(pb>>8); //write the high bits
+                spi_io(pb); //write the low bits
+                LATAbits.LATA0 = 1; //Bring CS high
+                
+        _CP0_SET_COUNT(0);
+        while (_CP0_GET_COUNT() < 24000) { // 1 second = 24000000
+            ;
+        }
+      }
 
 }
 
@@ -239,24 +222,24 @@ void makeSineWave() {
     }
     
     // Send bytes over SPI1
-//    unsigned char ca = 0;
-//    unsigned short pa;
-//    unsigned short j;
-//        for(j=0;j<RES;++j) {
-//            int voltage1 = SineWave[j]*4095;
-//            
-//                pa = ca<<15;
-//                pa = pa|(0b111<<12);
-//                pa = pa|voltage1;
-//
-//
-//                LATAbits.LATA0 = 0; //Bring CS low
-//                spi_io(pa>>8); //write the high bits
-//                spi_io(pa); //write the low bits
-//                LATAbits.LATA0 = 1; //Bring CS high
-//        _CP0_SET_COUNT(0);
-//        while (_CP0_GET_COUNT() < 24000) { // 1 second = 24000000
-//            ;
-//        }
-//        }
+    unsigned char ca = 0;
+    unsigned short pa;
+    unsigned short j;
+        for(j=0;j<NUMPTS;++j) {
+            int voltage1 = SineWave[j]*4095;
+            
+                pa = ca<<15;
+                pa = pa|(0b111<<12);
+                pa = pa|voltage1;
+
+
+                LATAbits.LATA0 = 0; //Bring CS low
+                spi_io(pa>>8); //write the high bits
+                spi_io(pa); //write the low bits
+                LATAbits.LATA0 = 1; //Bring CS high
+        _CP0_SET_COUNT(0);
+        while (_CP0_GET_COUNT() < 24000) { // 1 second = 24000000
+            ;
+        }
+        }
 }
